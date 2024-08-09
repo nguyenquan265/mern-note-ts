@@ -3,10 +3,13 @@ import router from './routes'
 import morgan from 'morgan'
 import errorMiddleware from './middlewares/error'
 import createHttpError from 'http-errors'
+import cors from 'cors'
+import corsOptions from './config/cors'
 
 const app = express()
 
 // Middlewares
+app.use(cors(corsOptions))
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
