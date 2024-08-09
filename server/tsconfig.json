@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "module": "NodeNext", // Quy định output module được sử dụng
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ],
     "moduleResolution": "NodeNext",
     "target": "ES2022", // Target output cho code
     "outDir": "dist", // Đường dẫn output cho thư mục build
@@ -17,9 +21,13 @@
   "ts-node": {
     "require": [
       "tsconfig-paths/register"
-    ]
+    ],
+    "files": true
   },
   "include": [
     "src/**/*"
-  ] // Đường dẫn include cho các file cần build
+  ], // Đường dẫn include cho các file cần build
+  "files": [
+    "./@types/session.d.ts"
+  ]
 }

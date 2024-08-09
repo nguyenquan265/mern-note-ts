@@ -36,7 +36,7 @@ export const createNote: RequestHandler = catchAsync(
 )
 
 export const updateNote: RequestHandler = catchAsync(
-  async (req: Request<IUpdateNoteParams, unknown, ICreateNoteBody, unknown>, res: Response, next: NextFunction) => {
+  async (req: Request<IUpdateNoteParams, unknown, IUpdateNoteBody, unknown>, res: Response, next: NextFunction) => {
     const noteId = req.params.noteId
     const title = req.body.title
     const text = req.body.text

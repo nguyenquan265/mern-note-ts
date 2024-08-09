@@ -5,6 +5,9 @@ import errorMiddleware from './middlewares/error'
 import createHttpError from 'http-errors'
 import cors from 'cors'
 import corsOptions from './config/cors'
+import session from 'express-session'
+import env from './config/env'
+import MongoStore from 'connect-mongo'
 
 const app = express()
 
@@ -13,6 +16,18 @@ app.use(cors(corsOptions))
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(
+  session({
+    secret: env.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60
+    },
+    rolling: true,
+    store: MongoStore.create({ mongoUrl: env.mongoUri })
+  })
+)
 
 // Routes
 app.use('/api/v1', router)
