@@ -8,6 +8,7 @@ import corsOptions from './config/cors'
 import session from 'express-session'
 import env from './config/env'
 import MongoStore from 'connect-mongo'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 
@@ -28,6 +29,7 @@ app.use(
     store: MongoStore.create({ mongoUrl: env.mongoUri })
   })
 )
+app.use(cookieParser())
 
 // Routes
 app.use('/api/v1', router)

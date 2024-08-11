@@ -2,6 +2,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import { Note } from '../models/note'
 import { useForm } from 'react-hook-form'
 import { INoteInput, createNote, updateNote } from '../apis/notes_api'
+import TextInputField from './form/TextInputField'
 
 interface AddOrEditNoteDialogProps {
   noteToEdit?: Note | null
@@ -45,7 +46,7 @@ const AddOrEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddOrEditNo
 
       <Modal.Body>
         <Form id='addOrEditNoteForm' onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group className='mb-3'>
+          {/* <Form.Group className='mb-3'>
             <Form.Label>Title</Form.Label>
             <Form.Control
               type='text'
@@ -54,11 +55,24 @@ const AddOrEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddOrEditNo
               {...register('title', { required: 'Required' })}
             />
             <Form.Control.Feedback type='invalid'>{errors.title?.message}</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className='mb-3'>
+          </Form.Group> */}
+
+          <TextInputField
+            name='title'
+            label='Title'
+            type='text'
+            placeholder='Title'
+            register={register}
+            registerOptions={{ required: 'Required' }}
+            error={errors.title}
+          />
+
+          <TextInputField name='text' label='Text' as='textarea' rows={5} placeholder='Text' register={register} />
+
+          {/* <Form.Group className='mb-3'>
             <Form.Label>Text</Form.Label>
             <Form.Control as='textarea' rows={5} placeholder='Text' {...register('text')} />
-          </Form.Group>
+          </Form.Group> */}
         </Form>
       </Modal.Body>
 
